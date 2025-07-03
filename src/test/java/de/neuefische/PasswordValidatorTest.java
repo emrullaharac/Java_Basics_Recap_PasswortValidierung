@@ -64,6 +64,18 @@ class PasswordValidatorTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"Passwort1!", "Hallo$2024", "Geheim@123"})
+    void containsSpecialCharacter_shouldReturnTrue_WhenPasswordContainsSpecialCharacter(String testPassword) {
+        assertTrue(PasswordValidator.containsSpecialCharacter(testPassword));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Passwort123", "NurBuchstaben", "123456789"})
+    void containsSpecialCharacter_shouldReturnFalse_WhenPasswordNotContainsSpecialCharacter(String testPassword) {
+        assertFalse(PasswordValidator.containsSpecialCharacter(testPassword));
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {
             "123456",
             "password",

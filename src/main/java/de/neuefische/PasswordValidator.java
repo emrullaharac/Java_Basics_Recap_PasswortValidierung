@@ -71,6 +71,13 @@ public class PasswordValidator {
     }
 
     /**
+     * Prüft, ob das Passwort mindestens ein Sonderzeichen enthält.
+     */
+    public static boolean containsSpecialCharacter(String password) {
+        return password.matches(".*[^a-zA-Z0-9].*");
+    }
+
+    /**
      * Prüft, ob das Passwort zu den häufig verwendeten Passwörtern gehört.
      */
     public static boolean isCommonPassword(String password) {
