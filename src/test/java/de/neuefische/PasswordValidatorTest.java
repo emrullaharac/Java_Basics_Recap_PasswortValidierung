@@ -8,6 +8,32 @@ import static org.junit.jupiter.api.Assertions.*;
 class PasswordValidatorTest {
 
     @ParameterizedTest
+    @ValueSource(strings = {
+            // Mindestens 8 Zeichen, enthält Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen, kein Common Password
+            "G!ut3nT@g2024",
+            "S1cher#Passw0rt",
+            "ZxCvB!12$%",
+            "J@vaR0cks2025",
+            "Mein_B3stes*PW"
+    })
+    void isValidPassword_shouldReturnTrue_WhenPasswordIsValid(String password) {
+        assertTrue(PasswordValidator.isValidPassword(password));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "password",    // häufig verwendetes Passwort, enthält nur Kleinbuchstaben, keine Zahl, kein Sonderzeichen
+            "12345678",    // häufig verwendetes Passwort, enthält nur Zahlen
+            "ABCDEFGH",    // nur Großbuchstaben, keine Zahl, kein Kleinbuchstabe
+            "abcdefg1",    // kein Großbuchstabe
+            "Abcdefg",     // keine Zahl
+            "Pass1",       // weniger als 8 Zeichen
+    })
+    void isValidPassword_shouldReturnFalse_WhenPasswordIsNOTValid(String password) {
+        assertFalse(PasswordValidator.isValidPassword(password));
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"abcdefgh", "abcd1234", "passwort123"})
     void checkLength_shouldReturnTrue_WhenPasswordLengthIsAtLeastEight(String testPassword) {
         assertTrue(PasswordValidator.checkLength(testPassword));

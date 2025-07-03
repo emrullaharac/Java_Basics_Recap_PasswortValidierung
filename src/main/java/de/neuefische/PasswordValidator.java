@@ -27,6 +27,13 @@ public class PasswordValidator {
     }
 
     /**
+     * Prüft, ob das gegebene Passwort alle Sicherheitskriterien erfüllt.
+     */
+    public static boolean isValidPassword(String password) {
+        return checkLength(password) && containsNumbers(password) && containsLetters(password) && !isCommonPassword(password);
+    }
+
+    /**
      * Prüft, ob das Passwort mindestens 8 Zeichen lang ist.
      */
     public static boolean checkLength(String password) {
