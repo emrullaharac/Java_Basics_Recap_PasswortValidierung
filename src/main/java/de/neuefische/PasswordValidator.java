@@ -30,7 +30,9 @@ public class PasswordValidator {
      * Prüft, ob das gegebene Passwort alle Sicherheitskriterien erfüllt.
      */
     public static boolean isValidPassword(String password) {
-        return checkLength(password) && containsNumbers(password) && containsLetters(password) && !isCommonPassword(password);
+        return checkLength(password) && containsNumbers(password) &&
+                containsLetters(password) && !isCommonPassword(password) &&
+                containsSpecialCharacter(password);
     }
 
     /**
